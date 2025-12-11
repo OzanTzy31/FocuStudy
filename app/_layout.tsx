@@ -1,24 +1,26 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { Stack } from "expo-router";
+import React from "react";
+import { AppProvider } from "../src/context/AppContext";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <AppProvider>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen name="index" options={{ title: "FocusStudy" }} />
+        <Stack.Screen
+          name="add-schedule"
+          options={{ title: "Tambah Jadwal" }}
+        />
+        <Stack.Screen
+          name="set-home-location"
+          options={{ title: "Set Lokasi Rumah" }}
+        />
+        {/* modal.tsx bawaan template, boleh dibiarkan */}
+        <Stack.Screen
+          name="modal"
+          options={{ presentation: "modal", title: "Modal" }}
+        />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    </AppProvider>
   );
 }
